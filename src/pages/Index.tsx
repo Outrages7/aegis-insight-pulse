@@ -1,11 +1,9 @@
-
 import { useState } from 'react';
 import { Filter } from 'lucide-react';
 import { Incident, Severity } from '@/types/incident';
 import IncidentCard from '@/components/IncidentCard';
 import IncidentForm from '@/components/IncidentForm';
 import { Button } from '@/components/ui/button';
-import { ThemeToggle } from '@/components/ThemeToggle';
 
 const initialIncidents: Incident[] = [
   {
@@ -55,18 +53,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex justify-end mb-4">
-          <ThemeToggle />
-        </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2">
             <div className="mb-8">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Safety Incident Dashboard</h1>
               <p className="text-gray-600">Track and manage AI safety incidents in real-time</p>
             </div>
             
-            {/* Filters */}
             <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex items-center gap-2">
@@ -92,7 +85,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Incidents List */}
             <div className="space-y-4">
               {filteredAndSortedIncidents.map((incident) => (
                 <IncidentCard key={incident.id} incident={incident} />
@@ -103,7 +95,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Sidebar with Form */}
           <div className="lg:col-span-1">
             <IncidentForm onSubmit={handleNewIncident} />
           </div>
