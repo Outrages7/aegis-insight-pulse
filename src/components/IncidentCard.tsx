@@ -13,21 +13,21 @@ const IncidentCard = ({ incident }: IncidentCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const severityColor = {
-    Low: 'bg-green-100 text-green-800',
-    Medium: 'bg-yellow-100 text-yellow-800',
-    High: 'bg-red-100 text-red-800',
+    Low: 'bg-green-500/20 text-green-400',
+    Medium: 'bg-yellow-500/20 text-yellow-400',
+    High: 'bg-red-500/20 text-red-400',
   }[incident.severity];
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4 mb-4 transition-all hover:shadow-md">
+    <div className="bg-card rounded-lg border shadow-md p-4 transition-all hover:shadow-lg">
       <div className="flex justify-between items-start">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-gray-900">{incident.title}</h3>
+          <h3 className="text-lg font-semibold text-foreground">{incident.title}</h3>
           <div className="flex items-center gap-3 mt-2">
             <span className={cn("px-2 py-1 rounded-full text-xs font-medium", severityColor)}>
               {incident.severity}
             </span>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-muted-foreground">
               {new Date(incident.reportedDate).toLocaleDateString()}
             </span>
           </div>
@@ -36,13 +36,13 @@ const IncidentCard = ({ incident }: IncidentCardProps) => {
           variant="ghost"
           size="sm"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="text-gray-500 hover:text-gray-700"
+          className="text-muted-foreground hover:text-foreground"
         >
           {isExpanded ? <ChevronUp /> : <ChevronDown />}
         </Button>
       </div>
       {isExpanded && (
-        <div className="mt-4 text-gray-600 text-sm animate-fade-in">
+        <div className="mt-4 text-muted-foreground text-sm animate-fade-in">
           {incident.description}
         </div>
       )}

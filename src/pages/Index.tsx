@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Filter } from 'lucide-react';
 import { Incident, Severity } from '@/types/incident';
@@ -56,18 +57,20 @@ const Index = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <div className="mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Safety Incident Dashboard</h1>
-              <p className="text-gray-600">Track and manage AI safety incidents in real-time</p>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-2">
+                AI Safety Incident Dashboard
+              </h1>
+              <p className="text-muted-foreground">Track and manage AI safety incidents in real-time</p>
             </div>
             
-            <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
+            <div className="bg-card p-4 rounded-lg border shadow-md mb-6">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <Filter className="text-gray-500" size={20} />
+                  <Filter className="text-muted-foreground" size={20} />
                   <select
                     value={selectedSeverity}
                     onChange={(e) => setSelectedSeverity(e.target.value as Severity | 'All')}
-                    className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="px-3 py-2 bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     <option value="All">All Severities</option>
                     <option value="Low">Low</option>
@@ -76,9 +79,9 @@ const Index = () => {
                   </select>
                 </div>
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   onClick={() => setSortByNewest(!sortByNewest)}
-                  className="text-gray-700"
+                  className="text-foreground"
                 >
                   Sort: {sortByNewest ? 'Newest First' : 'Oldest First'}
                 </Button>
@@ -90,7 +93,9 @@ const Index = () => {
                 <IncidentCard key={incident.id} incident={incident} />
               ))}
               {filteredAndSortedIncidents.length === 0 && (
-                <p className="text-center text-gray-500 py-8">No incidents found matching the current filters.</p>
+                <p className="text-center text-muted-foreground py-8">
+                  No incidents found matching the current filters.
+                </p>
               )}
             </div>
           </div>

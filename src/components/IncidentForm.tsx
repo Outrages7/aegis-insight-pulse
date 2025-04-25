@@ -26,11 +26,11 @@ const IncidentForm = ({ onSubmit }: IncidentFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm p-6">
-      <h2 className="text-xl font-semibold mb-4">Report New Incident</h2>
+    <form onSubmit={handleSubmit} className="bg-card rounded-lg border shadow-md p-6">
+      <h2 className="text-xl font-semibold mb-4 text-foreground">Report New Incident</h2>
       <div className="space-y-4">
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="title" className="block text-sm font-medium text-foreground mb-1">
             Title
           </label>
           <input
@@ -39,11 +39,11 @@ const IncidentForm = ({ onSubmit }: IncidentFormProps) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
         </div>
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="description" className="block text-sm font-medium text-foreground mb-1">
             Description
           </label>
           <textarea
@@ -52,18 +52,18 @@ const IncidentForm = ({ onSubmit }: IncidentFormProps) => {
             onChange={(e) => setDescription(e.target.value)}
             required
             rows={4}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
         </div>
         <div>
-          <label htmlFor="severity" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="severity" className="block text-sm font-medium text-foreground mb-1">
             Severity
           </label>
           <select
             id="severity"
             value={severity}
             onChange={(e) => setSeverity(e.target.value as Severity)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
