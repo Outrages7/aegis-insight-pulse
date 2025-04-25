@@ -5,6 +5,7 @@ import { Incident, Severity } from '@/types/incident';
 import IncidentCard from '@/components/IncidentCard';
 import IncidentForm from '@/components/IncidentForm';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const initialIncidents: Incident[] = [
   {
@@ -52,8 +53,11 @@ const Index = () => {
     });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex justify-end mb-4">
+          <ThemeToggle />
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
