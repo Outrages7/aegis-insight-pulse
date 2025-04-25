@@ -1,10 +1,10 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Filter } from 'lucide-react';
 import { Incident, Severity } from '@/types/incident';
 import IncidentCard from '@/components/IncidentCard';
 import IncidentForm from '@/components/IncidentForm';
 import { Button } from '@/components/ui/button';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 const initialIncidents: Incident[] = [
   {
@@ -31,9 +31,19 @@ const initialIncidents: Incident[] = [
 ];
 
 const Index = () => {
-  const [incidents, setIncidents] = useState<Incident[]>(initialIncidents);
+  const [incidents, setIncidents] = useState<Incident[]>([]);
   const [selectedSeverity, setSelectedSeverity] = useState<Severity | 'All'>('All');
   const [sortByNewest, setSortByNewest] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadInitialData = async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIncidents(initialIncidents);
+      setIsLoading(false);
+    };
+    loadInitialData();
+  }, []);
 
   const handleNewIncident = (newIncident: Omit<Incident, 'id'>) => {
     const incident: Incident = {
@@ -50,6 +60,17 @@ const Index = () => {
       const dateB = new Date(b.reportedDate).getTime();
       return sortByNewest ? dateB - dateA : dateA - dateB;
     });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <LoadingSpinner size={48} className="text-purple-500" />
+          <p className="text-muted-foreground">Loading incidents...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

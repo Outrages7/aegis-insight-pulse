@@ -1,7 +1,7 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Incident, Severity } from '@/types/incident';
+import LoadingSpinner from './LoadingSpinner';
 
 interface IncidentFormProps {
   onSubmit: (incident: Omit<Incident, 'id'>) => void;
@@ -11,18 +11,26 @@ const IncidentForm = ({ onSubmit }: IncidentFormProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [severity, setSeverity] = useState<Severity>('Low');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate submission delay
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
     onSubmit({
       title,
       description,
       severity,
       reportedDate: new Date().toISOString(),
     });
+    
     setTitle('');
     setDescription('');
     setSeverity('Low');
+    setIsSubmitting(false);
   };
 
   return (
@@ -70,8 +78,19 @@ const IncidentForm = ({ onSubmit }: IncidentFormProps) => {
             <option value="High">High</option>
           </select>
         </div>
-        <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
-          Submit Incident
+        <Button 
+          type="submit" 
+          className="w-full bg-purple-600 hover:bg-purple-700"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <div className="flex items-center gap-2">
+              <LoadingSpinner size={18} />
+              <span>Submitting...</span>
+            </div>
+          ) : (
+            "Submit Incident"
+          )}
         </Button>
       </div>
     </form>

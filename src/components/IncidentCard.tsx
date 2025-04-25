@@ -4,6 +4,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Incident } from '@/types/incident';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import LoadingSpinner from './LoadingSpinner';
 
 interface IncidentCardProps {
   incident: Incident;
@@ -11,12 +12,23 @@ interface IncidentCardProps {
 
 const IncidentCard = ({ incident }: IncidentCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const severityColor = {
     Low: 'bg-green-500/20 text-green-400',
     Medium: 'bg-yellow-500/20 text-yellow-400',
     High: 'bg-red-500/20 text-red-400',
   }[incident.severity];
+
+  const handleExpand = async () => {
+    if (!isExpanded) {
+      setIsLoading(true);
+      // Simulate loading delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setIsLoading(false);
+    }
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <div className="bg-card rounded-lg border shadow-md p-4 transition-all hover:shadow-lg">
@@ -35,10 +47,15 @@ const IncidentCard = ({ incident }: IncidentCardProps) => {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={handleExpand}
           className="text-muted-foreground hover:text-foreground"
+          disabled={isLoading}
         >
-          {isExpanded ? <ChevronUp /> : <ChevronDown />}
+          {isLoading ? (
+            <LoadingSpinner size={18} />
+          ) : (
+            isExpanded ? <ChevronUp /> : <ChevronDown />
+          )}
         </Button>
       </div>
       {isExpanded && (
