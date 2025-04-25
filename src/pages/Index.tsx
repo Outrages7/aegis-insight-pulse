@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Filter, Plus } from 'lucide-react';
 import { Incident, Severity } from '@/types/incident';
@@ -9,24 +10,24 @@ import { useNavigate } from 'react-router-dom';
 const initialIncidents: Incident[] = [
   {
     id: '1',
-    title: 'AI Model Bias Detection',
-    description: 'Discovered significant bias in production model outputs affecting minority groups.',
-    severity: 'High',
-    reportedDate: '2025-04-20T10:00:00Z',
+    title: 'Biased Recommendation Algorithm',
+    description: 'Algorithm consistently favored certain demographics...',
+    severity: 'Medium',
+    reportedDate: '2025-03-15T10:00:00Z',
   },
   {
     id: '2',
-    title: 'Data Privacy Breach',
-    description: 'Minor data exposure during model training process, affected data immediately quarantined.',
-    severity: 'Medium',
-    reportedDate: '2025-04-19T15:30:00Z',
+    title: 'LLM Hallucination in Critical Info',
+    description: 'LLM provided incorrect safety procedure information...',
+    severity: 'High',
+    reportedDate: '2025-04-01T14:30:00Z',
   },
   {
     id: '3',
-    title: 'Model Performance Degradation',
-    description: 'Gradual decline in model accuracy observed over past week, no critical systems affected.',
+    title: 'Minor Data Leak via Chatbot',
+    description: 'Chatbot inadvertently exposed non-sensitive user metadata...',
     severity: 'Low',
-    reportedDate: '2025-04-18T09:15:00Z',
+    reportedDate: '2025-03-20T09:15:00Z',
   },
 ];
 
